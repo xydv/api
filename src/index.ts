@@ -3,6 +3,9 @@ import { Api, TelegramClient } from "telegram";
 import { MarkdownV2Parser } from "telegram/extensions/markdownv2";
 import { StringSession } from "telegram/sessions";
 import { cors } from "@elysiajs/cors";
+import { createResponse } from "better-sse";
+import { musicChannel } from "./channels/musicChannel";
+import { TrackData } from "./types";
 
 const session = new StringSession(Bun.env.TG_SESSION);
 
@@ -69,6 +72,25 @@ app.get(
     params: t.Object({
       messageId: t.Number(),
     }),
+  },
+);
+
+// sse
+app.get("/music", (c) => {
+  return createResponse(c.request, (session) => {
+    musicChannel.register(session);
+  });
+});
+
+// webhook to channel
+app.post(
+  `/wh/${process.env.SECRET}`,
+  ({ body }) => {
+    musicChannel.broadcast(body);
+    return status(200);
+  },
+  {
+    body: TrackData,
   },
 );
 

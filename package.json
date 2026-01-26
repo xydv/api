@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@elysiajs/cors": "^1.4.1",
+    "better-sse": "^0.16.1",
     "elysia": "latest",
     "telegram": "^2.26.22"
   },
