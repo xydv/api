@@ -86,7 +86,8 @@ app.get("/music", (c) => {
 app.post(
   `/wh/${process.env.SECRET}`,
   ({ body }) => {
-    musicChannel.broadcast(body);
+    musicChannel.broadcast(body, "update");
+    musicChannel.state.track = body;
     return status(200);
   },
   {
