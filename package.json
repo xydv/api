@@ -11,6 +11,7 @@
     "better-sse": "^0.16.1",
     "bufferutil": "^4.1.0",
     "elysia": "latest",
+    "telegraf": "^4.16.3",
     "telegram": "^2.26.22"
   },
   "devDependencies": {

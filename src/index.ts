@@ -6,6 +6,7 @@ import { cors } from "@elysiajs/cors";
 import { createResponse } from "better-sse";
 import { musicChannel } from "./channels/musicChannel";
 import { TrackData } from "./types";
+import { Telegraf } from "telegraf";
 
 const session = new StringSession(Bun.env.TG_SESSION);
 
@@ -19,6 +20,7 @@ const client = new TelegramClient(
 await client.connect();
 
 const app = new Elysia();
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 app.use(cors());
 
@@ -81,6 +83,22 @@ app.get("/music", (c) => {
     musicChannel.register(session);
   });
 });
+
+// send anonymous messages
+app.post(
+  "/message",
+  async ({ body }) => {
+    try {
+      await bot.telegram.sendMessage(process.env.TG_ID, body.message);
+      return status(200);
+    } catch (e) {
+      return status(500);
+    }
+  },
+  {
+    body: t.Object({ message: t.String() }),
+  },
+);
 
 // webhook to channel
 app.post(
