@@ -4,13 +4,10 @@ import { TrackDataType } from "../types";
 const musicChannel = createChannel<{ track: TrackDataType }>({
   state: {
     track: {
-      duration: 420,
+      duration: "420",
       artist: "http",
       album: "404",
-      id: "xxx",
-      title: "not playing",
-      liked: false,
-      thumbnailUrl: "",
+      track: "not playing",
     },
   },
 });

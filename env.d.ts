@@ -6,5 +6,7 @@ declare module "bun" {
     TG_SESSION: string;
     TG_API_ID: string;
     TG_API_HASH: string;
+    ID_PASS: string;
+    LASTFM_SECRET: string;
   }
 }

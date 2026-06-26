@@ -1,13 +1,10 @@
 import { t } from "elysia";
 
 export const TrackData = t.Object({
-  duration: t.Number(),
+  duration: t.String(),
   artist: t.String(),
   album: t.String(),
-  id: t.String(),
-  title: t.String(),
-  liked: t.Boolean(),
-  thumbnailUrl: t.String(),
+  track: t.String(),
 });
 
 export type TrackDataType = typeof TrackData.static;
